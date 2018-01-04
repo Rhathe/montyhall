@@ -1,0 +1,65 @@
+.door {
+	height: 200px;
+	width: 120px;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.door .clickable {
+	height: 100%;
+	width: 100%;
+	border: 3px solid #4c1717;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: black;
+	cursor: pointer;
+}
+
+.door .goat {
+	background-image: url("/goat.jpeg");
+	background-size: contain;
+}
+
+.door .car {
+	background-image: url("/car.jpeg");
+	background-size: contain;
+}
+
+.door .panel {
+	display: none;
+	background-color: #FF4D4D;
+	height: 100%;
+	width: 100%;
+}
+
+.door .closed .panel {
+	display: block;
+}
+
+.door .arrow {
+	visibility: hidden;
+	color: green;
+	font-size: 50px;
+	font-weight: bold;
+	transform: scaleY(0.5);
+	margin: -15px;
+}
+
+.door .arrow.chosen {
+	visibility: visible;
+}
+
+.door .arrow.chosen.switched {
+	opacity: 0.2;
+}
+
+.door .knob {
+	border-radius: 50%;
+	background-color: yellow;
+	width: 15px;
+	height: 15px;
+	float: right;
+	margin-right: 5px;
+	margin-top: 85px;
+}
