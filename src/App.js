@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import Door from './Door.js';
 
+const queryString = require('query-string');
+
+
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.doorNum = 30;
+		const parsed = queryString.parse(window.location.search);
+		this.doorNum = Math.min(parseInt(parsed.doors) || 3, 100);
 		this.state = this.resetDoors();
 	}
 
@@ -154,9 +158,6 @@ class App extends Component {
 
 				<p>
 					<button onClick={() => this.retry()}>Retry</button>
-				</p>
-				<p>
-					<button onClick={() => this.reset()}>Reset All</button>
 				</p>
 			</div>
 		);
