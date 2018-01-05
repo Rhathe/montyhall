@@ -10,7 +10,11 @@ class App extends Component {
 		super(props);
 		const parsed = queryString.parse(window.location.search);
 		this.doorNum = Math.min(parseInt(parsed.doors) || 3, 100);
-		this.state = this.resetDoors();
+		this.state = Object.assign(this.resetDoors(), {
+			games: 0,
+			stayWins: 0,
+			switchWins: 0,
+		});
 	}
 
 	resetDoors() {
@@ -59,8 +63,6 @@ class App extends Component {
 		}
 	}
 
-	
-
 	clickStay() {
 		this.checkFinal(false)
 	}
@@ -88,7 +90,10 @@ class App extends Component {
 			switched: switched,
 			correct: correct,
 			mode: 'final',
-			doors: doors
+			doors: doors,
+			games: this.state.games + 1,
+			stayWins: this.state.stayWins + (correct && !switched && 1),
+			switchWins: this.state.switchWins + (correct && switched && 1)
 		});
 	}
 
@@ -111,9 +116,9 @@ class App extends Component {
 			),
 			'stayOrSwitch': (
 				<div>
-					<div>Stay or Switch?</div>
 					<button onClick={() => this.clickStay()}>Stay</button>
-					<button onClick={() => this.clickSwitch()}>Switch</button>
+					<span>or</span>
+					<button onClick={() => this.clickSwitch()}>Switch</button>?
 				</div>
 			),
 			'final': this.state.correct ?
@@ -137,19 +142,29 @@ class App extends Component {
 		this.setState(this.resetDoors());
 	}
 
-	reset() {
-	}
-
 	render() {
 		var doors = [];
 		for (var i = 0; i < this.doorNum; i++) {
 			doors.push(this.renderDoor(i));
 		}
 
+		var recordMsg = '';
+		if (this.state.games) {
+			recordMsg = (
+				<span>
+					You have won {this.state.stayWins}/{this.state.games} by staying
+					and {this.state.switchWins}/{this.state.games} by switching.
+				</span>
+			)
+		}
+
 		return (
 			<div className="App">
 				<div className="message">
 					{this.renderMessage()}
+				<p>
+					{recordMsg}
+				</p>
 				</div>
 
 				<div>

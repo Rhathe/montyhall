@@ -6,3 +6,15 @@
 	padding: 5px;
 	height: 60px;
 }
+
+.App .message div {
+	height: 20px;
+}
+
+.App .message span {
+	margin: 7px;
+}
+
+.App .message p {
+	margin: 10px;
+}
