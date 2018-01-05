@@ -9,7 +9,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		const parsed = queryString.parse(window.location.search);
-		this.doorNum = Math.min(parseInt(parsed.doors) || 3, 100);
+		this.doorNum = Math.min(Math.max(parseInt(parsed.doors, 10) || 3, 3), 100);
 		this.state = Object.assign(this.resetDoors(), {
 			games: 0,
 			stayWins: 0,
@@ -142,6 +142,10 @@ class App extends Component {
 		this.setState(this.resetDoors());
 	}
 
+	changeDoors(ev) {
+		window.location.search = queryString.stringify({doors: ev.target.value})
+	}
+
 	render() {
 		var doors = [];
 		for (var i = 0; i < this.doorNum; i++) {
@@ -158,6 +162,11 @@ class App extends Component {
 			)
 		}
 
+		var options = Array(97).fill().map((_, i) => {
+			let v = i + 3;
+			return <option key={v} value={v}>{v}</option>
+		})
+
 		return (
 			<div className="App">
 				<div className="message">
@@ -173,6 +182,13 @@ class App extends Component {
 
 				<p>
 					<button onClick={() => this.retry()}>Retry</button>
+				</p>
+
+				<p className="door-num">
+					<span>Doors:</span>
+					<select value={this.doorNum} onChange={this.changeDoors}>
+						{options}
+					</select>
 				</p>
 			</div>
 		);

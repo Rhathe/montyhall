@@ -15,6 +15,15 @@
 	margin: 7px;
 }
 
+.App .message button {
+	margin: 2px;
+}
+
 .App .message p {
 	margin: 10px;
+}
+
+.App .door-num * {
+	margin: 5px;
+	vertical-align: middle;
 }
