@@ -17,12 +17,12 @@
 }
 
 .door .goat {
-	background-image: url("/goat.jpeg");
+	background-image: url("./goat.jpeg");
 	background-size: contain;
 }
 
 .door .car {
-	background-image: url("/car.jpeg");
+	background-image: url("./car.jpeg");
 	background-size: contain;
 }
 
